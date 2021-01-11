@@ -5,7 +5,7 @@ use Mix.Config
 # Configure the main viewport for the Scenic application
 config :melrhohien, :viewport, %{
   name: :main_viewport,
-  size: {700, 600},
+  size: {1090, 490},
   default_scene: {Melrhohien.Scene.Home, nil},
   drivers: [
     %{
