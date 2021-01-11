@@ -18,12 +18,8 @@ defmodule Melrhohien.Scene.Home do
 
   @text_size 24
 
-  # bellface logo
-  @bellface_logo_path :code.priv_dir(:melrhohien)
-  |> Path.join("/static/images/bellface_logo.jpg")
-  @bellface_logo_hash Scenic.Cache.Support.Hash.file!(@bellface_logo_path, :sha)
-  @bellface_logo_width 1070
-  @bellface_logo_height 450
+  @file_dir :code.priv_dir(:melrhohien)
+    |> Path.join("/static/images/") 
 
   # ============================================================================
   # setup
@@ -34,22 +30,35 @@ defmodule Melrhohien.Scene.Home do
     # a transparent full-screen rectangle to catch user input
     {:ok, %ViewPort.Status{size: {width, height}}} = ViewPort.info(opts[:viewport])
 
-    # sample に従って cache
-    Scenic.Cache.Static.Texture.load(@bellface_logo_path, @bellface_logo_hash)
+    IO.inspect("#{width} #{height}")
+    # ロードした画像の取り出し
+    start_height = 50
+    start_width = 50
+    file_names = ["bellface_logo.jpg", "computer_cloud_system.png", "document_sekkeisyo.png", "document_shiyousyo.png", "gengou_system_reiwa.png"]
 
-    # show the version of scenic and the glfw driver
-    scenic_ver = Application.spec(:scenic, :vsn) |> to_string()
-    glfw_ver = Application.spec(:scenic_driver_glfw, :vsn) |> to_string()
-
+    png_path_and_hash = 
+    file_names
+      |> Enum.map(&(Path.join(@file_dir, &1)))
+      |> Enum.map(&({&1, Scenic.Cache.Support.Hash.file!(&1, :sha)}))
+    
+    png_path_and_hash
+      |> Enum.map(fn ({path, hash}) -> 
+        Scenic.Cache.Static.Texture.load(path, hash) 
+      end)
+    
+    png_rects =
+    png_path_and_hash
+      |> Enum.reduce([], fn({_, hash}, rects) ->
+          rects ++ [rect_spec(
+            {150, 150},
+            fill: {:image, hash},
+            translate: {start_width, start_height + length(rects) * 50},
+          )]
+        end)
+    
     graph =
       Graph.build(font: :roboto, font_size: @text_size)
-      |> add_specs_to_graph([
-        rect_spec(
-          {@bellface_logo_width, @bellface_logo_height},
-          fill: {:image, @bellface_logo_hash},
-          translate: {10, 10}),
-        text_spec("we are hiring!!", translate: {450, 480}),
-      ])
+      |> add_specs_to_graph(png_rects)
 
     {:ok, graph, push: graph}
   end
