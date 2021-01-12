@@ -30,7 +30,6 @@ defmodule Melrhohien.Scene.Home do
     # a transparent full-screen rectangle to catch user input
     {:ok, %ViewPort.Status{size: {width, height}}} = ViewPort.info(opts[:viewport])
 
-    IO.inspect("#{width} #{height}")
     # ロードした画像の取り出し
     start_height = 50
     start_width = 50
