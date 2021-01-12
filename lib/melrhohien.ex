@@ -9,7 +9,8 @@ defmodule Melrhohien do
 
     # start the application with the viewport
     children = [
-      {Scenic, viewports: [main_viewport_config]}
+      {Scenic, viewports: [main_viewport_config]},
+      Melrhohien.Repo,
     ]
 
     Supervisor.start_link(children, strategy: :one_for_one)

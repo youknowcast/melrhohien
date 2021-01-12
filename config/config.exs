@@ -2,6 +2,12 @@
 # and its dependencies with the aid of the Mix.Config module.
 use Mix.Config
 
+config :melrhohien, Melrhohien.Repo,
+  adapter: Sqlite.Ecto2,
+  database: "melrhohien.sqlite3"
+
+config :melrhohien, ecto_repos: [Melrhohien.Repo]
+
 # Configure the main viewport for the Scenic application
 config :melrhohien, :viewport, %{
   name: :main_viewport,

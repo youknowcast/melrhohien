@@ -16,7 +16,10 @@ defmodule Melrhohien.MixProject do
   def application do
     [
       mod: {Melrhohien, []},
-      extra_applications: [:crypto]
+      extra_applications: [:crypto],
+      applications: [
+        :logger, :sqlite_ecto2, :ecto
+      ]
     ]
   end
 
@@ -25,6 +28,7 @@ defmodule Melrhohien.MixProject do
     [
       {:scenic, "~> 0.10"},
       {:scenic_driver_glfw, "~> 0.10", targets: :host},
+      {:sqlite_ecto2, "~> 2.2"}
     ]
   end
 end
