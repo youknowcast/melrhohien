@@ -5,6 +5,8 @@ defmodule Melrhohien.Scene.Home do
   alias Scenic.Graph
   alias Scenic.ViewPort
 
+  alias Melrhohien.Models
+
   import Scenic.Primitives
   # import Scenic.Components
 
@@ -33,6 +35,10 @@ defmodule Melrhohien.Scene.Home do
     # ロードした画像の取り出し
     start_height = 50
     start_width = 50
+
+
+    aa = Models.get_images()
+    IO.inspect(aa)
     file_names = ["bellface_logo.jpg", "computer_cloud_system.png", "document_sekkeisyo.png", "document_shiyousyo.png", "gengou_system_reiwa.png"]
 
     png_path_and_hash = 
@@ -51,7 +57,7 @@ defmodule Melrhohien.Scene.Home do
           rects ++ [rect_spec(
             {150, 150},
             fill: {:image, hash},
-            translate: {start_width, start_height + length(rects) * 50},
+            translate: {start_width, start_height + length(rects) * 150},
           )]
         end)
     
