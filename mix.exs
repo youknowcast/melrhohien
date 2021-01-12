@@ -8,7 +8,12 @@ defmodule Melrhohien.MixProject do
       elixir: "~> 1.7",
       build_embedded: true,
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+
+      # Docs
+      name: "Melrhohien",
+      source_url: "https://github.com/youknowcast/melrhohien",
+      homepage_url: "https://github.com/youknowcast/melrhohien",
     ]
   end
 
@@ -28,7 +33,8 @@ defmodule Melrhohien.MixProject do
     [
       {:scenic, "~> 0.10"},
       {:scenic_driver_glfw, "~> 0.10", targets: :host},
-      {:sqlite_ecto2, "~> 2.2"}
+      {:sqlite_ecto2, "~> 2.2"},
+      {:ex_doc, "~> 0.22", only: :dev, runtime: false},
     ]
   end
 end
