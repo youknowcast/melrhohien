@@ -37,7 +37,7 @@ defmodule Melrhohien.Scene.Home do
     start_height = 50 + @nav_height
     start_width = 50
 
-    file_name_and_tags = Models.get_file_name_and_tags_by_file_name()
+    file_name_and_tags = Models.get_file_name_and_tags()
 
     png_path_and_hash = 
     file_name_and_tags
