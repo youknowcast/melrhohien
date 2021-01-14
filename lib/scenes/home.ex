@@ -6,9 +6,10 @@ defmodule Melrhohien.Scene.Home do
   alias Scenic.ViewPort
 
   alias Melrhohien.Models
+  alias Melrhohien.Component.Nav
 
   import Scenic.Primitives
-  # import Scenic.Components
+  import Scenic.Components
 
   @note """
     This is a very simple starter application.
@@ -18,6 +19,7 @@ defmodule Melrhohien.Scene.Home do
     mix scenic.new.example
   """
 
+  @nav_height 60
   @text_size 24
 
   @file_dir :code.priv_dir(:melrhohien)
@@ -32,17 +34,14 @@ defmodule Melrhohien.Scene.Home do
     # a transparent full-screen rectangle to catch user input
     {:ok, %ViewPort.Status{size: {width, height}}} = ViewPort.info(opts[:viewport])
 
-    # ロードした画像の取り出し
-    start_height = 50
+    start_height = 50 + @nav_height
     start_width = 50
 
-
-    aa = Models.get_images()
-    IO.inspect(aa)
-    file_names = ["bellface_logo.jpg", "computer_cloud_system.png", "document_sekkeisyo.png", "document_shiyousyo.png", "gengou_system_reiwa.png"]
+    file_name_and_tags = Models.get_file_name_and_tags_by_file_name()
 
     png_path_and_hash = 
-    file_names
+    file_name_and_tags
+      |> Enum.map(&(hd(&1)))
       |> Enum.map(&(Path.join(@file_dir, &1)))
       |> Enum.map(&({&1, Scenic.Cache.Support.Hash.file!(&1, :sha)}))
     
@@ -54,16 +53,34 @@ defmodule Melrhohien.Scene.Home do
     png_rects =
     png_path_and_hash
       |> Enum.reduce([], fn({_, hash}, rects) ->
-          rects ++ [rect_spec(
-            {150, 150},
-            fill: {:image, hash},
-            translate: {start_width, start_height + length(rects) * 150},
-          )]
-        end)
-    
+        idx = length(rects) # use as index
+
+        # FIXME 最初の 1 tag にしか対応していない 
+        tag = file_name_and_tags |> Enum.at(idx) |> Enum.at(1)
+
+        rects ++ [
+          group_spec(
+            [
+              rect_spec(
+                {180, 180},
+                fill: {:image, hash},
+              ),
+              button_spec(
+                tag, 
+                id: :btn_primary, 
+                theme: :primary,
+                t: { 20, 190 }
+              ),
+            ],
+            t: { start_width + length(rects) * 180, start_height }
+          )
+        ]
+      end)
+  
     graph =
       Graph.build(font: :roboto, font_size: @text_size)
       |> add_specs_to_graph(png_rects)
+      |> Nav.add_to_graph(__MODULE__)
 
     {:ok, graph, push: graph}
   end
