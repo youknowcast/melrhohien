@@ -50,15 +50,19 @@ defmodule Melrhohien.Scene.Home do
         Scenic.Cache.Static.Texture.load(path, hash) 
       end)
     
-    png_rects =
+    png_specs =
     png_path_and_hash
-      |> Enum.reduce([], fn({_, hash}, rects) ->
-        idx = length(rects) # use as index
+      |> Enum.reduce([], fn({_, hash}, specs) ->
+        idx = length(specs) # use as index
 
-        # FIXME 最初の 1 tag にしか対応していない 
-        tag = file_name_and_tags |> Enum.at(idx) |> Enum.at(1)
+        # FIXME 現状，最初の 1 tag のみ対応
+        tag =
+        case file_name_and_tags |> Enum.at(idx) |> Enum.at(1) do
+          nil -> ""
+          _ -> file_name_and_tags |> Enum.at(idx) |> Enum.at(1) 
+        end
 
-        rects ++ [
+        specs ++ [
           group_spec(
             [
               rect_spec(
@@ -72,14 +76,14 @@ defmodule Melrhohien.Scene.Home do
                 t: { 20, 190 }
               ),
             ],
-            t: { start_width + length(rects) * 180, start_height }
+            t: { start_width + length(specs) * 180, start_height }
           )
         ]
       end)
   
     graph =
       Graph.build(font: :roboto, font_size: @text_size)
-      |> add_specs_to_graph(png_rects)
+      |> add_specs_to_graph(png_specs)
       |> Nav.add_to_graph(__MODULE__)
 
     {:ok, graph, push: graph}
