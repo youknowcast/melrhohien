@@ -36,15 +36,12 @@ defmodule Melrhohien.Component.Nav do
   end
 
   # ----------------------------------------------------------------------------
-  def filter_event({:value_changed, :nav, scene}, _, %{viewport: vp} = state)
-      when is_atom(scene) do
-    ViewPort.set_root(vp, {scene, nil})
+  def filter_event({:click, :left_pagenate_button_id}, _, %{viewport: vp} = state) do
     {:halt, state}
   end
 
   # ----------------------------------------------------------------------------
-  def filter_event({:value_changed, :nav, scene}, _, %{viewport: vp} = state) do
-    ViewPort.set_root(vp, scene)
+  def filter_event({:click, :right_pagenate_button_id}, _, %{viewport: vp} = state) do
     {:halt, state}
   end
 end
