@@ -1,4 +1,8 @@
 defmodule Melrhohien.Scene.Home do
+  @moduledoc """
+  Home Scene を提供します．
+  """
+
   use Scenic.Scene
   require Logger
 

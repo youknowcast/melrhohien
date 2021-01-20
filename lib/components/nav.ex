@@ -1,4 +1,8 @@
 defmodule Melrhohien.Component.Nav do
+  @moduledoc """
+  画面ヘッダを定義します．
+  """
+
   use Scenic.Component
 
   alias Scenic.ViewPort
@@ -6,8 +10,6 @@ defmodule Melrhohien.Component.Nav do
 
   import Scenic.Primitives, only: [{:text, 3}, {:rect, 3}]
   import Scenic.Components
-
-  # import IEx
 
   @height 60
 

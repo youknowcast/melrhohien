@@ -1,4 +1,8 @@
 defmodule Melrhohien.Models.ImageTag do
+  @moduledoc """
+  image_tags table の Model を提供します．
+  """
+
   use Ecto.Schema
   alias Melrhohien.Image
   alias Melrhohien.Tag
