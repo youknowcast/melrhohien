@@ -28,3 +28,5 @@ config :melrhohien, :viewport, [
 # here (which is why it is important to import them last).
 #
 #     import_config "prod.exs"
+
+import_config "#{config_env()}.exs"
