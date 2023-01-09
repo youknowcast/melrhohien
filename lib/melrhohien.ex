@@ -5,12 +5,12 @@ defmodule Melrhohien do
 
   def start(_type, _args) do
     # load the viewport configuration from config
-    main_viewport_config = Application.get_env(:melrhohien, :viewport)
+    default_viewport_config = Application.get_env(:melrhohien, :viewport)
 
     # start the application with the viewport
     children = [
-      {Scenic, viewports: [main_viewport_config]},
-      Melrhohien.Repo,
+      {Scenic, [default_viewport_config]},
+      Melrhohien.Repo
     ]
 
     Supervisor.start_link(children, strategy: :one_for_one)
