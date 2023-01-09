@@ -9,17 +9,16 @@ config :melrhohien, ecto_repos: [Melrhohien.Repo]
 config :scenic, :assets, module: Melrhohien.Assets
 
 # Configure the main viewport for the Scenic application
-config :melrhohien, :viewport, [
+config :melrhohien, :viewport,
   name: :main_viewport,
   size: {1090, 490},
   default_scene: {Melrhohien.Scene.Home, nil},
   drivers: [
     [
       module: Scenic.Driver.Local,
-      name: :local,
+      name: :local
     ]
   ]
-]
 
 # It is also possible to import configuration files, relative to this
 # directory. For example, you can emulate configuration per environment

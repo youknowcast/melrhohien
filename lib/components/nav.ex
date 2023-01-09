@@ -24,15 +24,15 @@ defmodule Melrhohien.Component.Nav do
 
     graph =
       Graph.build(styles: styles, font_size: 20)
-        |> rect({400, @height}, fill: {48, 48, 48})
-        |> text("Saved images", translate: {64, 35}, align: :right)
-        |> button("<", id: :left_pagenate_button_id, translate: {5, 10})
-        |> button(">", id: :right_pagenate_button_id, translate: {1045, 10})
+      |> rect({400, @height}, fill: {48, 48, 48})
+      |> text("Saved images", translate: {64, 35}, align: :right)
+      |> button("<", id: :left_pagenate_button_id, translate: {5, 10})
+      |> button(">", id: :right_pagenate_button_id, translate: {1045, 10})
 
     scene =
       scene
-      |> assign( graph: graph )
-      |> push_graph( graph )
+      |> assign(graph: graph)
+      |> push_graph(graph)
 
     {:ok, scene}
   end

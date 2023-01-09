@@ -17,15 +17,18 @@ defmodule RepoTest do
         Repo.delete_all(Image)
         Repo.delete_all(Tag)
       end)
+
       %{}
     end
 
     test "returns file_name and name" do
       records = Melrhohien.Models.get_file_name_and_tags()
-      assert(records == [
-        ["computer_cloud_system.png", "computer_cloud_system"]
-      ])
+
+      assert(
+        records == [
+          ["computer_cloud_system.png", "computer_cloud_system"]
+        ]
+      )
     end
   end
-
 end

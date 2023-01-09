@@ -13,7 +13,7 @@ defmodule Melrhohien.MixProject do
       # Docs
       name: "Melrhohien",
       source_url: "https://github.com/youknowcast/melrhohien",
-      homepage_url: "https://github.com/youknowcast/melrhohien",
+      homepage_url: "https://github.com/youknowcast/melrhohien"
     ]
   end
 
@@ -23,7 +23,9 @@ defmodule Melrhohien.MixProject do
       mod: {Melrhohien, []},
       extra_applications: [:crypto],
       applications: [
-        :logger, :sqlite_ecto2, :ecto
+        :logger,
+        :sqlite_ecto2,
+        :ecto
       ]
     ]
   end
@@ -34,7 +36,7 @@ defmodule Melrhohien.MixProject do
       {:scenic, "~> 0.11.0"},
       {:scenic_driver_local, "~> 0.11.0"},
       {:sqlite_ecto2, "~> 2.2"},
-      {:ex_doc, "~> 0.22", only: :dev, runtime: false},
+      {:ex_doc, "~> 0.22", only: :dev, runtime: false}
     ]
   end
 end
