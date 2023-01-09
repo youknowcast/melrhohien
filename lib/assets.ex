@@ -1,4 +1,8 @@
 defmodule Melrhohien.Assets do
+  @moduledoc """
+  TBD
+  """
+
   use Scenic.Assets.Static,
     otp_app: :melrhohien,
     alias: [

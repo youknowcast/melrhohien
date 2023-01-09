@@ -1,4 +1,8 @@
 defmodule Melrhohien.Models do
+  @moduledoc """
+  TBD
+  """
+
   import Ecto.Query
   alias Melrhohien.Repo
 

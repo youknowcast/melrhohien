@@ -36,7 +36,8 @@ defmodule Melrhohien.MixProject do
       {:scenic, "~> 0.11.0"},
       {:scenic_driver_local, "~> 0.11.0"},
       {:sqlite_ecto2, "~> 2.2"},
-      {:ex_doc, "~> 0.22", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.22", only: :dev, runtime: false},
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false}
     ]
   end
 end
