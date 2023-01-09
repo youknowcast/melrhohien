@@ -1,6 +1,4 @@
-# This file is responsible for configuring your application
-# and its dependencies with the aid of the Mix.Config module.
-use Mix.Config
+import Config
 
 config :melrhohien, Melrhohien.Repo,
   adapter: Sqlite.Ecto2,
@@ -8,19 +6,20 @@ config :melrhohien, Melrhohien.Repo,
 
 config :melrhohien, ecto_repos: [Melrhohien.Repo]
 
+config :scenic, :assets, module: Melrhohien.Assets
+
 # Configure the main viewport for the Scenic application
-config :melrhohien, :viewport, %{
+config :melrhohien, :viewport, [
   name: :main_viewport,
   size: {1090, 490},
   default_scene: {Melrhohien.Scene.Home, nil},
   drivers: [
-    %{
-      module: Scenic.Driver.Glfw,
-      name: :glfw,
-      opts: [resizeable: false, title: "melrhohien"]
-    }
+    [
+      module: Scenic.Driver.Local,
+      name: :local,
+    ]
   ]
-}
+]
 
 # It is also possible to import configuration files, relative to this
 # directory. For example, you can emulate configuration per environment

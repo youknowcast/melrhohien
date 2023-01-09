@@ -5,11 +5,11 @@ defmodule Melrhohien do
 
   def start(_type, _args) do
     # load the viewport configuration from config
-    main_viewport_config = Application.get_env(:melrhohien, :viewport)
+    default_viewport_config = Application.get_env(:melrhohien, :viewport)
 
     # start the application with the viewport
     children = [
-      {Scenic, viewports: [main_viewport_config]},
+      {Scenic, [default_viewport_config]},
       Melrhohien.Repo,
     ]
 

@@ -31,8 +31,8 @@ defmodule Melrhohien.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:scenic, "~> 0.10"},
-      {:scenic_driver_glfw, "~> 0.10", targets: :host},
+      {:scenic, "~> 0.11.0"},
+      {:scenic_driver_local, "~> 0.11.0"},
       {:sqlite_ecto2, "~> 2.2"},
       {:ex_doc, "~> 0.22", only: :dev, runtime: false},
     ]

@@ -14,27 +14,27 @@ defmodule Melrhohien.Component.Nav do
   @height 60
 
   # --------------------------------------------------------
-  def verify(scene) when is_atom(scene), do: {:ok, scene}
-  def verify({scene, _} = data) when is_atom(scene), do: {:ok, data}
-  def verify(_), do: :invalid_data
+  def validate(scene) when is_atom(scene), do: {:ok, scene}
+  def validate({scene, _} = data) when is_atom(scene), do: {:ok, data}
+  def validate(_), do: :invalid_data
 
   # ----------------------------------------------------------------------------
-  def init(current_scene, opts) do
+  def init(scene, _, opts) do
     styles = opts[:styles] || %{}
-
-    # Get the viewport width
-    {:ok, %ViewPort.Status{size: {width, _}}} =
-      opts[:viewport]
-      |> ViewPort.info()
 
     graph =
       Graph.build(styles: styles, font_size: 20)
-        |> rect({width, @height}, fill: {48, 48, 48})
+        |> rect({400, @height}, fill: {48, 48, 48})
         |> text("Saved images", translate: {64, 35}, align: :right)
         |> button("<", id: :left_pagenate_button_id, translate: {5, 10})
         |> button(">", id: :right_pagenate_button_id, translate: {1045, 10})
 
-    {:ok, %{graph: graph, viewport: opts[:viewport]}, push: graph}
+    scene =
+      scene
+      |> assign( graph: graph )
+      |> push_graph( graph )
+
+    {:ok, scene}
   end
 
   # ----------------------------------------------------------------------------
